@@ -11,8 +11,8 @@ export const Button = ({
 }: {
 	title: string;
 	onClick?: () => void;
-	htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
-	type: 'apply' | 'clear';
+	htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type']; // HTMLButtonElement['type'] type?: "submit" | "reset" | "button" | undefined;
+	type: 'apply' | 'clear'; // ButtonHTMLAttributes
 }) => {
 	return (
 		<button

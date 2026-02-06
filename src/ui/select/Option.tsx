@@ -20,23 +20,29 @@ export const Option = (props: OptionProps) => {
 	} = props;
 	const optionRef = useRef<HTMLLIElement>(null);
 
+	// Функция которая возвращает обработчик событий для li
+	// OptionType['value'] - просто для читаемости
+	// Скорее декоративная типизация
+
+	// onClick закрывает/ открывает и использует onChange;
 	const handleClick =
 		(clickedValue: OptionType['value']): MouseEventHandler<HTMLLIElement> =>
 		() => {
 			onClick(clickedValue);
 		};
-
+	console.log(optionRef.current?.value);
+	console.log(value);
 	useEnterOptionSubmit({
-		optionRef,
-		value,
-		onClick,
+		optionRef, // ссылка на каждый option (li)
+		value, // Значение
+		onClick, // Изменит false + onchange с value
 	});
 
 	return (
 		<li
 			className={clsx(styles.option, styles[optionClassName || ''])}
 			value={value}
-			onClick={handleClick(value)}
+			onClick={handleClick(value)} // Наш option;
 			tabIndex={0}
 			data-testid={`select-option-${value}`}
 			ref={optionRef}>

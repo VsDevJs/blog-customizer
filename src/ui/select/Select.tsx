@@ -21,10 +21,15 @@ type SelectProps = {
 };
 
 export const Select = (props: SelectProps) => {
+	// Placeholder отрисуется, если у selected в свойстве title значение пустое
 	const { options, placeholder, selected, onChange, onClose, title } = props;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
+
+	// Зачем нужен ref тут этот  ? Ссылка на div общий  где прописан title или placeholder
 	const placeholderRef = useRef<HTMLDivElement>(null);
+
+	// У объекта selected проверить опциональный класс , если нету, то ''
 	const optionClassName = selected?.optionClassName ?? '';
 
 	useOutsideClickClose({
@@ -40,6 +45,7 @@ export const Select = (props: SelectProps) => {
 	});
 
 	const handleOptionClick = (option: OptionType) => {
+		console.log(rootRef);
 		setIsOpen(false);
 		onChange?.(option);
 	};
@@ -65,7 +71,7 @@ export const Select = (props: SelectProps) => {
 				<div
 					className={clsx(
 						styles.placeholder,
-						(styles as Record<string, string>)[optionClassName]
+						(styles as Record<string, string>)[optionClassName] // Наши стили
 					)}
 					data-status={status}
 					data-selected={!!selected?.value}
@@ -75,7 +81,7 @@ export const Select = (props: SelectProps) => {
 					ref={placeholderRef}>
 					<Text
 						family={
-							isFontFamilyClass(selected?.className)
+							isFontFamilyClass(selected?.className) // Посмотрел логику
 								? selected?.className
 								: undefined
 						}>
