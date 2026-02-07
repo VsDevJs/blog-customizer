@@ -1,8 +1,10 @@
+import { useState, forwardRef, useLayoutEffect, SetStateAction } from 'react';
+import clsx from 'clsx';
+import styles from './ArticleParamsForm.module.scss';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { RadioGroup } from '../../ui/radio-group';
 import { Separator } from '../../ui/separator';
-// import { OptionProps } from '../../ui/radio-group/Option';
 import { Select } from '../../ui/select';
 import { Text } from '../../ui/text';
 
@@ -17,12 +19,6 @@ import {
 	ArticleStateType,
 } from '../../constants/articleProps';
 
-import { useState, forwardRef, useLayoutEffect, SetStateAction } from 'react';
-
-import clsx from 'clsx';
-
-import styles from './ArticleParamsForm.module.scss';
-
 type ArticleFormProps = {
 	appRef: React.RefObject<HTMLDivElement> | null;
 	articleRef: React.RefObject<HTMLDivElement> | null;
@@ -34,14 +30,8 @@ type handleChange = (key: keyof ArticleStateType, option: OptionType) => void;
 
 export const ArticleParamsForm = forwardRef(
 	({ appRef, articleRef, open, setOpen }: ArticleFormProps) => {
-		// Берём setState
-		//const asideRef = useRef<HTMLElement | null>(null);
-		// Триггер для переключения состояния
 		const [trigger, setTrigger] = useState<boolean>(false);
 
-		// const [open, setOpen] = useState(false);
-
-		// сделать объект с состояниеми ref или useState в один
 		const [articleSettings, setArticleSettings] = useState<ArticleStateType>({
 			fontSizeOption: defaultArticleState.fontSizeOption,
 			fontFamilyOption: defaultArticleState.fontFamilyOption,
@@ -50,7 +40,6 @@ export const ArticleParamsForm = forwardRef(
 			contentWidth: defaultArticleState.contentWidth,
 		});
 
-		// Если я тыкну что-то, начнётся рендер и тут поменяется сразу. А мне это ненужно
 		useLayoutEffect(() => {
 			(Object.keys(articleSettings) as Array<keyof ArticleStateType>).forEach(
 				(keyObj) => {
@@ -79,6 +68,8 @@ export const ArticleParamsForm = forwardRef(
 					}
 				}
 			);
+
+			// Тригер для обновления состояния, который обновляет стили только при клике submit кнопки
 		}, [trigger]);
 
 		const handleChange: handleChange = (key, option) => {
@@ -110,7 +101,7 @@ export const ArticleParamsForm = forwardRef(
 			handleChange('contentWidth', option);
 		};
 
-		// Две функции обработчика для кнопок. Продумаем после того, как поймем где хранить состояние
+		// Две функции обработчика для кнопок
 		const handleSubmit = () => {
 			setTrigger((trigger) => !trigger);
 		};
@@ -136,8 +127,6 @@ export const ArticleParamsForm = forwardRef(
 						onSubmit={(event: React.FormEvent<HTMLFormElement>) =>
 							event.preventDefault()
 						}>
-						{' '}
-						{/* Нужно отменить событие у формы при отправке */}
 						<Text as='h1' size={31} weight={800} uppercase>
 							Задайте параметры
 						</Text>

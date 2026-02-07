@@ -13,16 +13,18 @@ const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
+	// Ссылка на main для манипуляции стилями
 	const appRef = useRef<HTMLDivElement>(null);
-	const articleRef = useRef<HTMLDivElement>(null); // ссылка чтобы проверить
+
+	// Для проверки условия в функции articleClose
+	const articleRef = useRef<HTMLDivElement>(null);
+
+	// Состояние стрелочки-кнопки arrow
 	const [open, setOpen] = useState<boolean>(false);
 
-	// Есть Ref общий main на него можно повесить клик. Проверять этот клик можно
-
+	// Функция предназначенная для закрытия сайд-бара при клике вне его координатов расположения
 	const articleClose = (event: React.MouseEvent) => {
 		const { target } = event;
-
-		// Если target содержит всё, что внутри, то
 		if (
 			target instanceof Node &&
 			!articleRef.current?.contains(target) &&

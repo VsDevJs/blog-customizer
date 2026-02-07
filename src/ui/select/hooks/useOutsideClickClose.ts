@@ -7,7 +7,6 @@ type UseOutsideClickClose = {
 	rootRef: React.RefObject<HTMLDivElement>;
 };
 
-// Может этот хелпер передать в артикл ?
 export const useOutsideClickClose = ({
 	isOpen,
 	rootRef,
@@ -18,10 +17,7 @@ export const useOutsideClickClose = ({
 		const handleClick = (event: MouseEvent) => {
 			const { target } = event;
 
-			// Странна проверка в лпане того, что закрытие всё равно происходит при клике куда угодно
-			// Т.е повесили в Select.tsx логику (handle) отдельно на список
 			if (target instanceof Node && !rootRef.current?.contains(target)) {
-				console.log('CLICK');
 				isOpen && onClose?.();
 				onChange?.(false);
 			}

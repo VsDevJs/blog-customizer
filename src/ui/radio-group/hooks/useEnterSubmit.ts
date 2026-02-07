@@ -12,8 +12,6 @@ export const useEnterSubmit = ({
 	option,
 	optionRef,
 }: UseEnterSubmit) => {
-	// const optionRef = useRef<HTMLDivElement>(null);
-
 	useEffect(() => {
 		const optionHtml = optionRef.current;
 

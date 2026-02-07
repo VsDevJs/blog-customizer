@@ -15,32 +15,32 @@ export type OptionProps = {
 };
 
 export const Option = (props: OptionProps) => {
-	const { value, title, selected, groupName, onChange, option } = props; // option - объект
+	const { value, title, selected, groupName, onChange, option } = props;
 
-	const optionRef = useRef<HTMLDivElement>(null); // Сделать активным хук
+	const optionRef = useRef<HTMLDivElement>(null);
 
 	const handleChange = () => onChange?.(option);
 
 	useEnterSubmit({ onChange, option, optionRef });
 
-	const inputId = `${groupName}_radio_item_with_value__${value}`; // в div и input они равны;
-	const isChecked = value === selected.title; //  title объекта и value равны
+	const inputId = `${groupName}_radio_item_with_value__${value}`;
+	const isChecked = value === selected.title;
 
 	return (
 		<div
 			className={styles.item}
-			key={value} // Зачем тут второй раз key, если он используется в Radio Group при вызове компонета и переборе в map
-			data-checked={isChecked} // В селекторах css через этот checked будет накладываться стили
-			data-testid={inputId} // Для тестов в dom видимо;
-			tabIndex={0} // Для tab;
+			key={value}
+			data-checked={isChecked}
+			data-testid={inputId}
+			tabIndex={0}
 			ref={optionRef}>
 			<input
 				className={styles.input}
-				type='radio' // просто типизация radio
-				name={groupName} // Для того чтобы объединить все radio
+				type='radio'
+				name={groupName}
 				id={inputId}
 				value={value}
-				onChange={handleChange} // Взять кнопку и сделать selected;
+				onChange={handleChange}
 				tabIndex={-1}
 			/>
 			<label className={styles.label} htmlFor={inputId}>
