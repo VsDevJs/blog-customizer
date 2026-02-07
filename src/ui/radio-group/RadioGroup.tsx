@@ -25,7 +25,6 @@ export const RadioGroup = (props: RadioGroupProps) => {
 	const handleChange = (option: OptionType) => onChange?.(option);
 
 	// Это походу нигде не используется в дальнейшем
-	console.log('RENDER');
 	return (
 		<div className={styles.container}>
 			{title && (

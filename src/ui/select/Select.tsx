@@ -24,14 +24,17 @@ export const Select = (props: SelectProps) => {
 	// Placeholder отрисуется, если у selected в свойстве title значение пустое
 	const { options, placeholder, selected, onChange, onClose, title } = props;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	// Список где иконка находится и placeholder;
 	const rootRef = useRef<HTMLDivElement>(null);
 
-	// Зачем нужен ref тут этот  ? Ссылка на div общий  где прописан title или placeholder
+	// Зачем нужен ref тут этот ? Ссылка на div общий  где прописан title или placeholder
 	const placeholderRef = useRef<HTMLDivElement>(null);
 
-	// У объекта selected проверить опциональный класс , если нету, то ''
+	// У объекта selected проверить опциональный класс, если нету, то ''
 	const optionClassName = selected?.optionClassName ?? '';
 
+	// Кнопка закрытия (Если клик вне элемента), onClose - опциональная
 	useOutsideClickClose({
 		isOpen,
 		rootRef,
@@ -39,16 +42,19 @@ export const Select = (props: SelectProps) => {
 		onChange: setIsOpen,
 	});
 
+	//
 	useEnterSubmit({
 		placeholderRef,
 		onChange: setIsOpen,
 	});
 
+	// Клик на опциях
 	const handleOptionClick = (option: OptionType) => {
-		console.log(rootRef);
 		setIsOpen(false);
 		onChange?.(option);
 	};
+
+	// Клик на наш элемент
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
@@ -65,7 +71,7 @@ export const Select = (props: SelectProps) => {
 			<div
 				className={styles.selectWrapper}
 				ref={rootRef}
-				data-is-active={isOpen}
+				data-is-active={isOpen} //  Для стилизации
 				data-testid='selectWrapper'>
 				<img src={arrowDown} alt='иконка стрелочки' className={styles.arrow} />
 				<div
@@ -74,14 +80,14 @@ export const Select = (props: SelectProps) => {
 						(styles as Record<string, string>)[optionClassName] // Наши стили
 					)}
 					data-status={status}
-					data-selected={!!selected?.value}
+					data-selected={!!selected?.value} // Здесь получается так -
 					onClick={handlePlaceHolderClick}
 					role='button'
 					tabIndex={0}
 					ref={placeholderRef}>
 					<Text
 						family={
-							isFontFamilyClass(selected?.className) // Посмотрел логику
+							isFontFamilyClass(selected?.className)
 								? selected?.className
 								: undefined
 						}>

@@ -30,8 +30,7 @@ export const Option = (props: OptionProps) => {
 		() => {
 			onClick(clickedValue);
 		};
-	console.log(optionRef.current?.value);
-	console.log(value);
+
 	useEnterOptionSubmit({
 		optionRef, // ссылка на каждый option (li)
 		value, // Значение
