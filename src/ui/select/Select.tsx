@@ -29,6 +29,8 @@ export const Select = (props: SelectProps) => {
 
 	const optionClassName = selected?.optionClassName ?? '';
 
+	// hook который принимает ссылку
+	console.log(rootRef);
 	useOutsideClickClose({
 		isOpen,
 		rootRef,

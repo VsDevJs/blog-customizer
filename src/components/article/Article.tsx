@@ -1,14 +1,14 @@
 import clsx from 'clsx';
-
+import { forwardRef } from 'react';
 // Сообщаем вебпаку, что этот файл использует это изображение.
 import plane from 'src/images/plane.png';
 import { Text } from 'src/ui/text';
 
 import styles from './Article.module.scss';
 
-export const Article = () => {
+export const Article = forwardRef<HTMLDivElement>((_, ref) => {
 	return (
-		<article className={clsx(styles.article)}>
+		<article className={clsx(styles.article)} ref={ref}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
 				Портрет Западной Швейцарии
 			</Text>
@@ -47,4 +47,6 @@ export const Article = () => {
 			</Text>
 		</article>
 	);
-};
+});
+
+Article.displayName = 'Article';
