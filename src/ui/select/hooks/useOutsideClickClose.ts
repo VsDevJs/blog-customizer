@@ -23,10 +23,8 @@ export const useOutsideClickClose = ({
 			}
 		};
 
-		// Вешаем событие при монтировании
 		window.addEventListener('mousedown', handleClick);
 
-		// Сбрасываем событие после размонтирования
 		return () => {
 			window.removeEventListener('mousedown', handleClick);
 		};

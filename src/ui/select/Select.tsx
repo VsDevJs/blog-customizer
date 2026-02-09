@@ -29,8 +29,6 @@ export const Select = (props: SelectProps) => {
 
 	const optionClassName = selected?.optionClassName ?? '';
 
-	// hook который принимает ссылку
-	console.log(rootRef);
 	useOutsideClickClose({
 		isOpen,
 		rootRef,
@@ -43,13 +41,11 @@ export const Select = (props: SelectProps) => {
 		onChange: setIsOpen,
 	});
 
-	// Клик на опциях
 	const handleOptionClick = (option: OptionType) => {
 		setIsOpen(false);
 		onChange?.(option);
 	};
 
-	// Клик на наш элемент
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};

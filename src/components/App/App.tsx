@@ -8,7 +8,7 @@ import styles from './index.module.scss';
 export const App = () => {
 	const [open, setOpen] = useState<boolean>(false);
 	const articleRef = useRef<HTMLDivElement>(null);
-	// Ссылка на main для манипуляции стилями
+
 	const [style, setStyle] = useState<Record<string, string>>({
 		'--font-family': defaultArticleState.fontFamilyOption.value,
 		'--font-size': defaultArticleState.fontSizeOption.value,
