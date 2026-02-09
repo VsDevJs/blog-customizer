@@ -5,7 +5,7 @@ import { useEnterSubmit } from './hooks/useEnterSubmit';
 
 import styles from './RadioGroup.module.scss';
 
-type OptionProps = {
+export type OptionProps = {
 	value: OptionType['value'];
 	title: OptionType['title'];
 	selected: OptionType;
@@ -21,7 +21,7 @@ export const Option = (props: OptionProps) => {
 
 	const handleChange = () => onChange?.(option);
 
-	useEnterSubmit({ onChange, option });
+	useEnterSubmit({ onChange, option, optionRef });
 
 	const inputId = `${groupName}_radio_item_with_value__${value}`;
 	const isChecked = value === selected.title;

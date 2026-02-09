@@ -24,7 +24,9 @@ export const Select = (props: SelectProps) => {
 	const { options, placeholder, selected, onChange, onClose, title } = props;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const rootRef = useRef<HTMLDivElement>(null);
+
 	const placeholderRef = useRef<HTMLDivElement>(null);
+
 	const optionClassName = selected?.optionClassName ?? '';
 
 	useOutsideClickClose({
@@ -43,6 +45,7 @@ export const Select = (props: SelectProps) => {
 		setIsOpen(false);
 		onChange?.(option);
 	};
+
 	const handlePlaceHolderClick: MouseEventHandler<HTMLDivElement> = () => {
 		setIsOpen((isOpen) => !isOpen);
 	};
